@@ -1,0 +1,19 @@
+#body_ {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
