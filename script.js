@@ -1,12 +1,54 @@
 // 그래서 js가 마크업 언어죠?
 
-var cellNumber = [4, 4, 4, 4, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1];
-
+var cellNumber = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var cell = document.getElementsByClassName("block");
+var gameOver = document.getElementById("gameOver");
+var isGameOver = 0;
 
 function display() {
     for (let i = 0; i < 16; i++) {
-        cell[i].innerHTML = "<div>" + cellNumber[i]+"</div>"
+        let color = "";
+
+        switch(cellNumber[i]) {
+            case 0: 
+                color = "#BDAC97";
+                break;
+            case 2:
+                color = "#EEE4DA";
+                break;
+            case 4:
+                color = "#EBD8B6";
+                break;
+            case 8:
+                color = "#F2B179";
+                break;
+            case 16:
+                color = "#F59563";
+                break;
+            case 32:
+                color = "#F67C5F";
+                break;
+            case 64:
+                color = "#F65E3B";
+                break;
+            case 128:
+                color = "#EDCF72";
+                break;
+            case 256:
+                color = "#EDCC61";
+                break;
+            case 512:
+                color = "#EDC850";
+                break;
+            case 1024:
+                color = "#EDC53F"
+                break;
+            default:
+                color = "#000000";
+                break;
+        }
+        cell[i].style.backgroundColor = color;
+        cell[i].innerHTML = "<div>"+cellNumber[i]+"</div>"
     }
 }
 
@@ -104,31 +146,86 @@ function right() {
     }
 }
 
+// 2 90% | 4 10%
+function addRandom() {
+    let random = Math.floor(Math.random() * 16);
+    while (cellNumber[random] != 0) random = Math.floor(Math.random() * 16);
+    const TwoFour = Math.floor(Math.random() * 10);
+    if (TwoFour < 9) cellNumber[random] = 2;
+    else cellNumber[random] = 4;
+}
+
+function isEqual(array1, array2, number) {
+    for (let i = 0 ; i < number; i++) {
+        if (array1[i] != array2[i]) return false;
+    }
+    return true;
+}
+
 function keydown(event) {
-    console.log(event)
+    if (isGameOver == 1) return;
+    
     if (event.keyCode == "38" || event.keyCode == "87") {
         // up
+        let beforeCellNumber = Array.from(cellNumber);
         up();
+        if (isEqual(beforeCellNumber, cellNumber, 12)) return;
     }
     else if (event.keyCode == "40" || event.keyCode == "83") {
         // down
+        let beforeCellNumber = Array.from(cellNumber);
         down();
+        if (isEqual(beforeCellNumber, cellNumber, 12)) return;
     }
     else if (event.keyCode == "37" || event.keyCode == "65") {
         // left
+        let beforeCellNumber = Array.from(cellNumber);
         left();
+        if (isEqual(beforeCellNumber, cellNumber, 12)) return;
     }
     else if (event.keyCode == "39" || event.keyCode == "68") {
         // right
+        let beforeCellNumber = Array.from(cellNumber);
         right();
+        if (isEqual(beforeCellNumber, cellNumber, 12)) return;
     }
-    console.log(cellNumber);
+    else return;
+    addRandom();
     display();
+
+    let gameOverFlag = 4;
+    let beforeCellNumber = Array.from(cellNumber);
+    up();
+    if (isEqual(beforeCellNumber, cellNumber, 12)) gameOverFlag--;
+    else cellNumber = Array.from(beforeCellNumber);
+
+    beforeCellNumber = Array.from(cellNumber);
+    down();
+    if (isEqual(beforeCellNumber, cellNumber, 12)) gameOverFlag--;
+    else cellNumber = Array.from(beforeCellNumber);
+    
+    beforeCellNumber = Array.from(cellNumber);
+    left();
+    if (isEqual(beforeCellNumber, cellNumber, 12)) gameOverFlag--;
+    else cellNumber = Array.from(beforeCellNumber);
+    
+    beforeCellNumber = Array.from(cellNumber);
+    right();
+    if (isEqual(beforeCellNumber, cellNumber, 12)) gameOverFlag--;
+    else cellNumber = Array.from(beforeCellNumber);
+
+    if (gameOverFlag == 0) {
+        // GAMEOVER
+        gameOver.innerHTML = "<div>GAMEOVER</div>";
+        return;
+    }
 }
 /* display(); */
 
 // public static void main(String args[]) {
 //     document.addEventListener("keydown", keydown)
 // }
+addRandom();
+addRandom();
 display();
 document.addEventListener("keydown", keydown);
