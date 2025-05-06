@@ -169,25 +169,37 @@ function keydown(event) {
         // up
         let beforeCellNumber = Array.from(cellNumber);
         up();
-        if (isEqual(beforeCellNumber, cellNumber, 12)) return;
+        if (isEqual(beforeCellNumber, cellNumber, 16)){
+            console.log("isEqual");
+            return;
+        }
     }
     else if (event.keyCode == "40" || event.keyCode == "83") {
         // down
         let beforeCellNumber = Array.from(cellNumber);
         down();
-        if (isEqual(beforeCellNumber, cellNumber, 12)) return;
+        if (isEqual(beforeCellNumber, cellNumber, 16)){
+            console.log("isEqual");
+            return;
+        }
     }
     else if (event.keyCode == "37" || event.keyCode == "65") {
         // left
         let beforeCellNumber = Array.from(cellNumber);
         left();
-        if (isEqual(beforeCellNumber, cellNumber, 12)) return;
+        if (isEqual(beforeCellNumber, cellNumber, 16)){
+            console.log("isEqual");
+            return;
+        }
     }
     else if (event.keyCode == "39" || event.keyCode == "68") {
         // right
         let beforeCellNumber = Array.from(cellNumber);
         right();
-        if (isEqual(beforeCellNumber, cellNumber, 12)) return;
+        if (isEqual(beforeCellNumber, cellNumber, 16)){
+            console.log("isEqual");
+            return;
+        }
     }
     else return;
     addRandom();
@@ -196,22 +208,22 @@ function keydown(event) {
     let gameOverFlag = 4;
     let beforeCellNumber = Array.from(cellNumber);
     up();
-    if (isEqual(beforeCellNumber, cellNumber, 12)) gameOverFlag--;
+    if (isEqual(beforeCellNumber, cellNumber, 16)) gameOverFlag--;
     else cellNumber = Array.from(beforeCellNumber);
 
     beforeCellNumber = Array.from(cellNumber);
     down();
-    if (isEqual(beforeCellNumber, cellNumber, 12)) gameOverFlag--;
+    if (isEqual(beforeCellNumber, cellNumber, 16)) gameOverFlag--;
     else cellNumber = Array.from(beforeCellNumber);
     
     beforeCellNumber = Array.from(cellNumber);
     left();
-    if (isEqual(beforeCellNumber, cellNumber, 12)) gameOverFlag--;
+    if (isEqual(beforeCellNumber, cellNumber, 16)) gameOverFlag--;
     else cellNumber = Array.from(beforeCellNumber);
     
     beforeCellNumber = Array.from(cellNumber);
     right();
-    if (isEqual(beforeCellNumber, cellNumber, 12)) gameOverFlag--;
+    if (isEqual(beforeCellNumber, cellNumber, 16)) gameOverFlag--;
     else cellNumber = Array.from(beforeCellNumber);
 
     if (gameOverFlag == 0) {
