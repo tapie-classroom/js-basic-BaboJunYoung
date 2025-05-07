@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'font';
+    src: url('./font.ttf') format('truetype');
+}
+
 #body_ {
     display: flex;
     align-items: center;
@@ -21,6 +26,7 @@
 .block {
     height: 15vh;
     width: 15vh;
+    font-family: "font";
     align-items: center;
     justify-content: center;
     display: flex;
