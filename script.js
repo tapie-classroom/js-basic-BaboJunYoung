@@ -44,7 +44,7 @@ function display() {
                 color = "#EDC53F"
                 break;
             default:
-                color = "#000000";
+                color = "#829d56";
                 break;
         }
         cell[i].style.backgroundColor = color;
